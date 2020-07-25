@@ -11,7 +11,6 @@ do
 
   while [ $count -le 3 ]
   do
-    echo "First Block of Code"
     free -m
     sleep 15
     ./clean_memory.sh
@@ -22,7 +21,6 @@ do
 
   while read line
   do
-    echo "Second Block of Code"
     ./clean_memory.sh
     sleep 15
     docker commit $line repo/ubuntu:brave_
