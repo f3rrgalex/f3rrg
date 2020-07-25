@@ -4,71 +4,29 @@
 
 docker ps -l -q >autorun_id
 
-while [[ true ]]; do
+count=1
 
-  free -m
-  sleep 15
-  ./clean_memory.sh
-  free -m
-  sleep 300
+while [[ true ]]
+do
 
-  free -m
-  sleep 15
-  ./clean_memory.sh
-  free -m
-  sleep 300
+  while [ $count -le 9 ]
+  do
+    free -m
+    sleep 15
+    ./clean_memory.sh
+    free -m
+    sleep 300
+    count=$(( $count + 1 ))
+  done
 
-  free -m
-  sleep 15
-  ./clean_memory.sh
-  free -m
-  sleep 300
-
-  free -m
-  sleep 15
-  ./clean_memory.sh
-  free -m
-  sleep 300
-
-
-  free -m
-  sleep 15
-  ./clean_memory.sh
-  free -m
-  sleep 300
-
-  free -m
-  sleep 15
-  ./clean_memory.sh
-  free -m
-  sleep 300
-
-  free -m
-  sleep 15
-  ./clean_memory.sh
-  free -m
-  sleep 300
-
-  free -m
-  sleep 15
-  ./clean_memory.sh
-  free -m
-  sleep 300
-
-  free -m
-  sleep 15
-  ./clean_memory.sh
-  free -m
-  sleep 300
-
-  ./clean_memory.sh
-  sleep 15
   while read line
   do
+    ./clean_memory.sh
+    sleep 15
     docker commit $line repo/ubuntu:brave_
     docker push repo/ubuntu:brave_
     docker rmi -f $(docker images | grep "<none>" | awk '{print $3}')
+    ./clean_memory.sh
+    sleep 30
   done <autorun_id
-  ./clean_memory.sh
-  sleep 30
 done
